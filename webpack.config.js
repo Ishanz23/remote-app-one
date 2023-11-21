@@ -9,6 +9,9 @@ module.exports = withModuleFederationPlugin({
     "./Module": "./src/app/app.module.ts",
     "./AppComponent": "./src/app/app.component.ts",
   },
+  remotes: {
+    "mfe-shared-components": "http://localhost:4500/remoteEntry.js",
+  },
   shared: share({
     "@angular/core": {
       singleton: true,

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { loadRemoteModule } from '@angular-architects/module-federation';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'mfe-one-root',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'remote-app-one';
+
+  @ViewChild('dynamicComponent', { read: ViewContainerRef })
+  dynamicComponent!: ViewContainerRef;
+
+  async ngOnInit() {
+    const { DynamicComponent } = await loadRemoteModule({
+      type: 'module',
+      remoteEntry: 'http://localhost:4500/remoteEntry.js',
+      exposedModule: './DynamicComponent',
+    });
+
+    this.dynamicComponent.clear();
+    this.dynamicComponent.createComponent(DynamicComponent);
+  }
 }

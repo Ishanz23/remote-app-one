@@ -1,5 +1,16 @@
-<div>Remote App One Here</div>
-<shared-dynamic
-  [propOne]="'This is a Web Component Loaded in Remote 1'"
-  [propTwo]="'Hi from Shared Again'"
-></shared-dynamic>
+<div class="text-2xl text-center text-slate-800">Remote App One Here</div>
+<div class="mb-2 text-center">
+  Switch is now
+  <span
+    class="text-lg font-bold"
+    [ngClass]="{ red: !toggleMe(), green: toggleMe() }"
+    >{{ toggleMe() ? "ON" : "OFF" }}</span
+  >
+</div>
+<div class="flex items-center justify-center">
+  <shared-dynamic
+    [propOne]="'This is a Web Component Loaded in Remote 1'"
+    [buttonName]="'toggle'"
+    (customEvent)="onCustomEvent($event)"
+  ></shared-dynamic>
+</div>

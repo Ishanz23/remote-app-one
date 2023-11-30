@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'mfe-one-root',
@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  componentProps = {
-    propOne: 'A String prop',
-    propTwo: 5,
-  };
+  toggleMe = signal(false);
+
+  onCustomEvent(event: Event) {
+    this.toggleMe.update((value) => !value);
+  }
 }
